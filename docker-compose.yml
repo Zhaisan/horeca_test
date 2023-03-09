@@ -1,0 +1,21 @@
+version: "3.9"
+services:
+  web-service:
+    build: .
+    ports:
+      - "8000:8000"
+    depends_on:
+      - database
+  rpc-service:
+    build: .
+    ports:
+      - "8001:8001"
+    depends_on:
+      - database
+  database:
+    image: mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./data:/data/db
